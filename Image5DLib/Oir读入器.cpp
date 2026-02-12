@@ -560,6 +560,13 @@ Oir读入器::Oir读入器(LPCWSTR 头文件路径)
 			throw ex;
 		创建新索引(字符缓冲.get());
 	}
+	catch (Image5D::Win32异常 ex)
+	{
+		if (ex.Win32错误码 == ERROR_FILE_NOT_FOUND)
+			创建新索引(字符缓冲.get());
+		else
+			throw;
+	}
 	catch (...)
 	{
 		//throw Image5D异常(索引加载失败);

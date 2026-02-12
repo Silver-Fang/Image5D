@@ -1,7 +1,7 @@
 #include "文件映射.h"
 using namespace Image5D;
 文件映射::文件映射(LPCWSTR 文件路径, bool 只读) :
-	文件句柄(CreateFileW(文件路径, 只读 ? GENERIC_READ : GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL)), 只读(只读)
+	文件句柄(CreateFileW(文件路径, 只读 ? GENERIC_READ : GENERIC_READ | GENERIC_WRITE, 只读 ? FILE_SHARE_READ | FILE_SHARE_WRITE : FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL)), 只读(只读)
 {
 	if (文件句柄 == INVALID_HANDLE_VALUE)
 		throw Win32异常{Exception::File_opening_failed, GetLastError()};
